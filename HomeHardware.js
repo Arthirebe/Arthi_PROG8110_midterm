@@ -256,11 +256,12 @@ module.exports = class HomeHardware extends Order {
                 if (this.sExtras) {
                     aReturn.push(`with ${this.sExtras}`);
                 }
-                // aReturn.push(`Total amount to be paid is $${this.nPrice}`);
-                // aReturn.push(`Please pay for your order here`);
-                // aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);
-                aReturn.push(`Your total comes to $ ${this.nPrice.toFixed(2)}`);
-                aReturn.push(`We will text you from 519-222-2222 when your order is ready or if we have questions.`)
+                this.ntax=this.nPrice*0.13;
+                this.ntotal=this.nPrice+this.ntax;
+                aReturn.push(`SubTotal is $ ${this.nPrice.toFixed(2)}`);
+                aReturn.push(`Tax is $${this.ntax.toFixed(2)}`);
+                aReturn.push(`Total(including tax) is $${this.ntotal.toFixed(2)}`);
+                aReturn.push(`We will text you from 519-222-2222 when we are ready with your order to meet you at curbside.`)
                 this.isDone(true);
                 break;
         }
