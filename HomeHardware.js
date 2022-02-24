@@ -8,7 +8,8 @@ const OrderState = Object.freeze({
     KITCHEN: Symbol("kitchen"),
     EXTRAS: Symbol("extras"),
     CHOOSEONE: Symbol("chooseone"),
-    ALL: Symbol("all")
+    ALL: Symbol("all"),
+    CONFIRMATION: Symbol("confirmation")
 });
 
 module.exports = class HomeHardware extends Order {
@@ -43,12 +44,12 @@ module.exports = class HomeHardware extends Order {
                     this.stateCur = OrderState.APPLIANCE;
                     this.sAppliance = "Applicance product: ";
                     aReturn.push(`Which ${this.sAppliance} would you like to order? Toaster (or) Countertop oven (or) Can opener`);
-                    console.log("SELECTION 1" +sInput);
+                    console.log("SELECTION 1" + sInput);
                 }
                 else if ((sInput.toLowerCase() == "2") || (sInput.toLowerCase() == "cleaning")) {
                     this.stateCur = OrderState.KITCHEN;
                     this.sCleaning = "Cleaning product: ";
-                    aReturn.push(`Which  ${this.sCleaning} would you like to order? Wastebasket (or) Garbage bag (or) Dish soap (or) Broom (or) Mop`);
+                    aReturn.push(`Which  ${this.sCleaning} would you like to order? Wastebasket (or) Garbage bag (or) Dish soap (or) Broom`);
                 }
                 else if ((sInput.toLowerCase() == "3") || (sInput.toLowerCase() == "kitchen")) {
                     this.stateCur = OrderState.CHOOSEONE;
@@ -71,17 +72,17 @@ module.exports = class HomeHardware extends Order {
                     this.nPrice = this.nPrice + 29.99;
                     console.log(this.nPrice);
                     this.stateCur = OrderState.CLEANING;
-                    this.sAppliance= this.sAppliance +` 2 Slice Toaster with Extra Wide Slots  White and Chrome`;
+                    this.sAppliance = this.sAppliance + ` 2 Slice Toaster with Extra Wide Slots  White and Chrome`;
                     aReturn.push(`2 Slice Toaster with Extra Wide Slots  White and Chrome ADDED`);
                     aReturn.push(`Would you like to pick some cleaning product`);
-                    
+
                 }
                 else if (this.sSelection == "countertop oven") {
                     console.log("Countertop ovens");
                     aReturn.push(`Natural 4-Slice Convection Toaster Oven (TO1755SBC) - Grey, 1150W ADDED`);
                     this.nPrice = this.nPrice + 54.99;
-                   this.stateCur = OrderState.CLEANING;
-                   this.sAppliance= this.sAppliance + ` Natural 4-Slice Convection Toaster Oven (TO1755SBC) - Grey, 1150W`;
+                    this.stateCur = OrderState.CLEANING;
+                    this.sAppliance = this.sAppliance + ` Natural 4-Slice Convection Toaster Oven (TO1755SBC) - Grey, 1150W`;
                     aReturn.push("Would you like to pick some cleaning product");
                 }
                 else if (this.sSelection == "can opener") {
@@ -89,7 +90,7 @@ module.exports = class HomeHardware extends Order {
                     aReturn.push("Countertop Electric Can Opener with Knife Sharpener (75224PS) - White ADDED");
                     this.nPrice = this.nPrice + 24.99;
                     this.stateCur = OrderState.CLEANING;
-                    this.sAppliance= this.sAppliance + ` Countertop Electric Can Opener with Knife Sharpener (75224PS) - White`;
+                    this.sAppliance = this.sAppliance + ` Countertop Electric Can Opener with Knife Sharpener (75224PS) - White`;
                     aReturn.push("Would you like to pick some cleaning product");
                 }
                 else {
@@ -107,7 +108,7 @@ module.exports = class HomeHardware extends Order {
                 if (sInput.toLowerCase() != "no") {
                     this.stateCur = OrderState.KITCHEN;
                     this.sCleaning = "Cleaning product: ";
-                    aReturn.push(`Which ${this.sCleaning} would you like to order? Wastebasket (or) Garbage bag (or) dish soap (or) broom (or) mop`);
+                    aReturn.push(`Which ${this.sCleaning} would you like to order? Wastebasket (or) Garbage bag (or) dish soap (or) broom`);
                 }
                 else {
                     this.stateCur = OrderState.EXTRAS;
@@ -116,51 +117,49 @@ module.exports = class HomeHardware extends Order {
                 break;
 
             case OrderState.KITCHEN:
-                if (sInput.toLowerCase() == "wastebasket")
-                {
+                if (sInput.toLowerCase() == "wastebasket") {
                     console.log("Waste Basket");
                     aReturn.push("Vanity Wastebasket - Black / Stainless Steel, 14 L")
                     this.nPrice = this.nPrice + 14.49;
                     console.log(this.nPrice);
-                    this.sCleaning=this.sCleaning + ` Vanity Wastebasket - Black / Stainless Steel, 14 L`;
+                    this.sCleaning = this.sCleaning + ` Vanity Wastebasket - Black / Stainless Steel, 14 L`;
                     this.stateCur = OrderState.EXTRAS;
                     aReturn.push("Would you like to buy some Kitchen Products");
                 }
-                else if (sInput.toLowerCase() == "garbage bag") 
-                {
+                else if (sInput.toLowerCase() == "garbage bag") {
                     console.log("Garbage bag");
                     aReturn.push(`10 Pack 28" x 30" Tall Bin Compostable Bags`);
                     this.nPrice = this.nPrice + 6.69;
-                    this.sCleaning=this.sCleaning + ` 10 Pack 28" x 30" Tall Bin Compostable Bags`;
+                    this.sCleaning = this.sCleaning + ` 10 Pack 28" x 30" Tall Bin Compostable Bags`;
                     this.stateCur = OrderState.EXTRAS;
                     aReturn.push("Would you like to buy some Kitchen Products");
                 }
-                else if (sInput.toLowerCase() == "dish soap") 
-                {
+                else if (sInput.toLowerCase() == "dish soap") {
                     console.log("Dish soap");
                     aReturn.push(`4L Dish Soap`);
                     this.nPrice = this.nPrice + 13.97;
-                    this.sCleaning=this.sCleaning + ` 4L Dish Soap`;
+                    this.sCleaning = this.sCleaning + ` 4L Dish Soap`;
                     this.stateCur = OrderState.EXTRAS;
-                   // this.sKitchen = sInput;
+                    // this.sKitchen = sInput;
                     aReturn.push("Would you like to buy some Kitchen Products");
                 }
                 else if (sInput.toLowerCase() == "broom") {
                     console.log("Broom");
                     aReturn.push(`Angle Broom, with Dust Pan`);
-                    this.sCleaning = this.sCleaning + ` Angle Broom, with Dust Pan`;
                     this.nPrice = this.nPrice + 19.99;
+                    this.sCleaning = this.sCleaning + ` Angle Broom, with Dust Pan`;
                     this.stateCur = OrderState.EXTRAS;
                     aReturn.push("Would you like to buy some Kitchen Products");
                 }
-                else if (sInput.toLowerCase() == "mop") {
-                    console.log("Mop");
-                    aReturn.push(`EasyWring Rinse Clean Spin Mop & Bucket System`);
-                    this.sCleaning = this.sCleaning + ` EasyWring Rinse Clean Spin Mop & Bucket System`;
-                    this.nPrice = this.nPrice + 59.99;
-                    this.stateCur = OrderState.EXTRAS;
-                    aReturn.push("Would you like to buy some Kitchen Products");
-                }
+                // else if(sInput.toLowerCase() == "mop") 
+                // {
+                //     console.log("Mop" +sInput);          
+                //     aReturn.push("EasyWring Rinse Clean Spin Mop & Bucket System");
+                //     this.nPrice = this.nPrice + 59.99;
+                //     this.sCleaning = this.sCleaning + ` EasyWring Rinse Clean Spin Mop & Bucket System`;
+                //     this.stateCur = OrderState.EXTRAS;                    
+                //     aReturn.push(`Would you like to buy some Kitchen Products`);
+                // }
                 else {
                     aReturn.push(`${sInput} is not valid, please type Wastebasket (or) Garbage bag (or) dish soap (or) broom (or) mop`);
                 }
@@ -180,8 +179,7 @@ module.exports = class HomeHardware extends Order {
                 break;
 
             case OrderState.CHOOSEONE:
-                if (sInput.toLowerCase() == "bakeware") 
-                {
+                if (sInput.toLowerCase() == "bakeware") {
                     console.log("Bakeware");
                     aReturn.push(`Silicone Muffin Pan - White Confetti, 12 Cup`);
                     this.nPrice = this.nPrice + 24.99;
@@ -191,10 +189,10 @@ module.exports = class HomeHardware extends Order {
                     aReturn.push("Which one you would like to add to this purchase geeky headlamps or ear buds. Type no if you are not interested");
                 }
                 else if (sInput.toLowerCase() == "cookware") {
-                    console. log("Cookware");
+                    console.log("Cookware");
                     aReturn.push(`Cast Iron Skillet - 10.25"/26 cm`);
                     this.sKitchen = this.sKitchen + ` Cast Iron Skillet - 10.25"/26 cm`;
-                    this.nPrice = this.nPrice + 46.99; 
+                    this.nPrice = this.nPrice + 46.99;
                     this.stateCur = OrderState.ALL;
                     aReturn.push("Would you like to include ear bud or geeky headlamps with");
                 }
@@ -221,32 +219,30 @@ module.exports = class HomeHardware extends Order {
 
             case OrderState.ALL:
                 console.log("This is extra" + sInput);
-                if(sInput.toLowerCase() != "no"){
-                    if (sInput.toLowerCase() == "ear buds")
-                    {
+                if (sInput.toLowerCase() != "no") {
+                    if (sInput.toLowerCase() == "ear buds") {
                         this.sExtras = sInput;
                         this.nPrice = this.nPrice + 5.99;
                         this.stateCur = OrderState.CONFIRMATION;
                         aReturn.push("Enter your name to view Total");
                     }
-                else if(sInput.toLowerCase() == "geeky headlamps") 
-                {
-                    this.sExtras = sInput;
-                    this.nPrice = this.nPrice + 6.99;
-                    this.stateCur=OrderState.CONFIRMATION;
+                    else if (sInput.toLowerCase() == "geeky headlamps") {
+                        this.sExtras = sInput;
+                        this.nPrice = this.nPrice + 6.99;
+                        this.stateCur = OrderState.CONFIRMATION;
+                        aReturn.push("Enter your name to view Total");
+                    }
+                    else {
+                        aReturn.push(`${sInput} is invalid entry. Type ear buds or geeky headlamps`);
+                    }
+                }
+                else {
+                    this.stateCur = OrderState.CONFIRMATION;
                     aReturn.push("Enter your name to view Total");
                 }
-                else{
-                    aReturn.push(`${sInput} is invalid entry. Type ear buds or geeky headlamps`);
-                }
-            }
-            else{
-                this.stateCur=OrderState.CONFIRMATION;
-                aReturn.push("Enter your name to view Total");
-            }
                 break;
 
-                case OrderState.CONFIRMATION:
+            case OrderState.CONFIRMATION:
                 aReturn.push(`Hi ${sInput} Thank-you for your order of`);
                 if (this.sAppliance) {
                     aReturn.push(`${this.sAppliance}`);
@@ -595,16 +591,6 @@ module.exports = class HomeHardware extends Order {
                 </td>
                 <td class="c7" colspan="1" rowspan="1">
                     <p class="c4"><span class="c10">$ 19.99</span></p>
-                </td>
-            </tr>
-            <tr class="c3">
-                <td class="c7" colspan="1" rowspan="1">
-                    <p class="c5"><span class="c1">Mops:</span></p>
-                    <p class="c5"><span>EasyWring Rinse Clean Spin Mop &amp; Bucket System</span></p>
-                </td>
-                <td class="c7" colspan="1" rowspan="1">
-                    <p class="c5"><span class="c1">$ 59.99</span></p>
-                    <p class="c4 c6"><span class="c1"></span></p>
                 </td>
             </tr>
         </tbody>
